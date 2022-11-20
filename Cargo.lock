@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "fn_ty"
+name = "fn_to_struct"
 version = "0.1.0"
 dependencies = [
  "paste",

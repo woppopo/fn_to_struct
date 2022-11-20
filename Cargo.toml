@@ -1,5 +1,5 @@
 [package]
-name = "fn_ty"
+name = "fn_to_struct"
 version = "0.1.0"
 edition = "2021"
 license = "CC0-1.0"

@@ -3,7 +3,7 @@
 #![feature(unboxed_closures)]
 
 #[macro_export]
-macro_rules! fn2ty {
+macro_rules! fn_to_struct {
     () => {};
     ($vi:vis fn $name:ident<$($life:lifetime,)* $($t:ident $(: $bound:path)?),*>($($arg:ident: $argt:ty),*) -> $ret:ty
     $(where
@@ -61,10 +61,10 @@ macro_rules! fn2ty {
             }
         }
 
-        $crate::fn2ty! { $($rem)* }
+        $crate::fn_to_struct! { $($rem)* }
     };
     ($vi:vis fn $name:ident<$($life:lifetime),*> $($rem:tt)*) => {
-        $crate::fn2ty!($vi fn $name<$($life,)*> $($rem)*)
+        $crate::fn_to_struct!($vi fn $name<$($life,)*> $($rem)*)
     };
     ($vi:vis fn $name:ident($($arg:ident: $argt:ty),*) -> $ret:ty $body:block $($rem:tt)*) => {
         #[allow(non_camel_case_types)]
@@ -91,15 +91,15 @@ macro_rules! fn2ty {
             }
         }
 
-        $crate::fn2ty! { $($rem)* }
+        $crate::fn_to_struct! { $($rem)* }
     };
     ($vi:vis fn $name:ident($($arg:ident: $argt:ty),*) $body:block $($rem:tt)*) => {
-        $crate::fn2ty! { $vi fn $name($($arg: $argt),*) -> () $body $($rem)* }
+        $crate::fn_to_struct! { $vi fn $name($($arg: $argt),*) -> () $body $($rem)* }
     };
 }
 
 #[cfg(test)]
-fn2ty!(
+fn_to_struct!(
     fn test() {}
     fn test2(a: u32) -> u32 {
         a + 42
