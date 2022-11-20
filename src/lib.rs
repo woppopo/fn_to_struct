@@ -52,6 +52,9 @@ fn2ty!(
     pub fn test3(a: u32, b: u32) -> u32 {
         a + b
     }
+    pub fn test4() -> test3 {
+        test3
+    }
 );
 
 #[test]
@@ -60,4 +63,5 @@ fn test_functions() {
     assert_eq!((), test());
     assert_eq!(42, test2(0));
     assert_eq!(90, test3(30, 60));
+    assert_eq!(132, test4()(42, 90));
 }
