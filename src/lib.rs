@@ -2,6 +2,8 @@
 #![feature(fn_traits)]
 #![feature(unboxed_closures)]
 
+pub use paste::paste;
+
 #[macro_export]
 macro_rules! fn_to_struct {
     () => {};
@@ -18,7 +20,7 @@ macro_rules! fn_to_struct {
             $name,
         }
 
-        ::paste::paste! {
+        $crate::paste! {
             mod [<__ $name>] {
                 pub(super) use super::$name::$name;
             }
